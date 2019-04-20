@@ -18,7 +18,7 @@ Heavily influenced by this project: [DIY Kubernetes cluster with x86 stick-pcs](
 #### Download
 
 * [Ubuntu Server](https://www.ubuntu.com/download/server)
-* [balenaEtcher](https://www.balena.io/etcher) 
+* [balenaEtcher](https://www.balena.io/etcher)
 
 #### Installation Notes
 
@@ -26,7 +26,7 @@ Use the standard install process for all three UP boards. Download [Ubuntu Serve
 
 Each node should be named with the pattern `node0x` (eg: node01, node02, node03, etc.)
 
-Use the same username and password for each host. Be sure that during setup each install is using all of the available drive space on the device. 
+Use the same username and password for each host. Be sure that during setup each install is using all of the available drive space on the device.
 
 There is no need to install any additional software during the setup process.
 
@@ -62,6 +62,9 @@ The next steps to follow were found in this blog post: [Your instant Kubernetes 
     # Run the kubeadm join command that kubeadm init gave you after setting up weave
     # The command looks something like this
     sudo kubeadm join --token <token> <node01 ip>:6443 --discovery-token-ca-cert-hash sha256:<hash>
+
+    # Print out the join command above again when needed (new nodes)
+    kubeadm token create --print-join-command
 
 Now you should be done. If you run `kubectl get nodes` on the first node you can see a list of all three nodes. It may take a minute for them to all be in a ready state.
 
@@ -124,7 +127,7 @@ Visit [https://192.168.2.200](https://192.168.2.200). You may have to approve yo
 This page will require a bearer token for authentication. The `dashboard-user.yaml` file created this for us. To retrieve it...
 
 	kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
-	
+
 Copy the "token" and paste it in to the dashboard page for access.
 
 # Troubleshooting the install
