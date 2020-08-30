@@ -37,7 +37,7 @@ At this point you should have three (or more) machines that you can SSH in to. T
     sudo -i
     apt update && apt upgrade
 
-Visit [Install Docker CE](https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce) and follow the instructions. Once you run `sudo apt-get install docker-ce` you are done with that page.
+Visit [Install Docker CE](https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce) and follow the instructions. Once you run `sudo apt-get install docker.io` you are done with that page.
 
 The next steps to follow were found in this blog post: [Your instant Kubernetes cluster by Alex Ellis](https://blog.alexellis.io/your-instant-kubernetes-cluster/) Shortened list of instructions are here just in case that link dies.
 
@@ -51,7 +51,8 @@ The next steps to follow were found in this blog post: [Your instant Kubernetes 
 
     sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubernetes-cni
 
-    sudo kubeadm init
+    # You might not have this machine set up correctly. If you want these errors can be ignored.
+    sudo kubeadm init --ignore-preflight-errors
 
     mkdir -p $HOME/.kube
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
